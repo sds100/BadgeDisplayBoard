@@ -1,0 +1,72 @@
+<!-- Just add more items to the 'data' list -->
+<style>
+    img.fill_cell {
+        width: 100%;
+        /* height: 100%; */
+        /* display: block */
+    }
+
+    body {
+        background-color: #212121;
+        color: white;
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px;
+    }
+
+    div.title {
+        font-size: 60px;
+        align-self: center;
+        font-family: 'Lato', sans-serif;
+    }
+
+    table.table {
+        width: 100%;
+        height: 100%;
+        text-align: left
+    }
+</style>
+
+<!-- Lato! 😊-->
+<link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+
+<body>
+    <table id="badge_table" class="table" cellpadding="10">
+        <tr>
+            <th width="40%"></th>
+            <th width="60%"></th>
+        </tr>
+    </table>
+    <script>
+        const REFRESH_INTERVAL_MS = 5000
+        const table = document.getElementById("badge_table")
+        const data = [
+            // Example item: { title: "Here is a title", badge_url: "https://badge_url.com" }
+        ]
+
+        for (let i = 0; i < data.length; i++) {
+            const row = table.insertRow(i)
+
+            const titleCell = row.insertCell(0)
+            titleCell.innerHTML = `<div class="title">` + data[i].title + `</div>`
+
+            const badgeCell = row.insertCell(1)
+            badgeCell.innerHTML = `<img class="fill_cell" src=` + data[i].badge_url + `>`
+        }
+
+        function refreshAutomatically() {
+            var interval = setInterval(function () {
+                for (let i = 0; i < data.length; i++) {
+                    const row = table.rows[i]
+
+                    const titleCell = row.cells[0]
+                    titleCell.innerHTML = `<div class="title">` + data[i].title + `</div>`
+
+                    const badgeCell = row.cells[1]
+                    badgeCell.innerHTML = `<img class="fill_cell" src=` + data[i].badge_url + `>`
+                }
+            }, REFRESH_INTERVAL_MS);
+        }
+
+        refreshAutomatically()
+    </script>
+</body>
